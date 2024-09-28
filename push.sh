@@ -1,3 +1,6 @@
+# get current file path and cd to the directory
+cd "$(dirname "$0")"
+
 mkdir -p ./.config/
 cp -r ~/.config/nvim/ .config/
 cp -r ~/.config/kitty/ .config/

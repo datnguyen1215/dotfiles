@@ -11,12 +11,24 @@
 
 set $mod Mod4
 
+gaps inner 10
+gaps outer -10
+smart_gaps on
+
+# remove window title bars
+for_window [class="^.*"] border pixel 1
+
+# change colors for borders
+client.focused #c4c400 #c4c400 #000000 #c4c400
+
 bindsym $mod+b exec --no-startup-id firefox -P default
 bindsym $mod+F1 exec --no-startup-id systemctl suspend
 exec --no-startup-id blueman-applet
 exec --no-startup-id NetworkManager
 exec --no-startup-id nm-applet
 exec --no-startup-id obsidian
+exec_always --no-startup-id feh --bg-scale ~/backgrounds/dark-waters.jpg
+exec_always --no-startup-id picom
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
