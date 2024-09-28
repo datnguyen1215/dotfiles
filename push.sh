@@ -2,6 +2,10 @@ current_dir=$(pwd)
 
 cd "$(dirname "$0")"
 
+# save working copies
+git add .
+git stash
+
 mkdir -p .config/
 cp -r ~/.config/nvim/ .config/
 cp -r ~/.config/kitty/ .config/
@@ -17,7 +21,11 @@ cp -r ~/.local/share/themes/ .local/share/
 mkdir -p etc/timeshift/
 sudo cp -r /etc/timeshift etc/timeshift/
 
+# commit changes
 git add .
 git commit -m "Update dotfiles"
+
+# restore working copies
+git stash pop
 
 cd $current_dir
