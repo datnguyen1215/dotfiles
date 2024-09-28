@@ -9,6 +9,8 @@ cp -r .local ~/
 cp -r .config ~/
 cp .tmux.conf ~/
 
+sudo cp -r etc/timeshift /etc/timeshift/
+
 chmod 755 ~/.local/bin/*
 
 cd $current_dir
