@@ -9,7 +9,7 @@ cp -r .local ~/
 cp -r .config ~/
 cp .tmux.conf ~/
 
-sudo cp -r etc/timeshift /etc/timeshift/
+sudo cp -r etc/timeshift/ /etc/
 
 chmod 755 ~/.local/bin/*
 
