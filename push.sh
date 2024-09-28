@@ -22,7 +22,4 @@ cp -r /etc/timeshift etc/
 git add .
 git commit -m "Update dotfiles"
 
-# restore working copies
-git stash pop
-
 cd $current_dir
