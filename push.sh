@@ -7,6 +7,7 @@ cp -r ~/.config/kitty/ .config/
 cp -r ~/.config/i3/ .config/
 cp -r ~/.config/gtk-3.0/ .config/
 cp -r ~/.tmux.conf ./
+cp -r ~/.bashrc ./
 
 mkdir -p ./.local/share/
 cp -r ~/.local/share/fonts/ .local/share/
