@@ -16,7 +16,7 @@ cp -r ~/.local/share/fonts/ .local/share/
 cp -r ~/.local/share/themes/ .local/share/
 
 mkdir -p etc/
-cp -r /etc/timeshift etc/timeshift/
+cp -r /etc/timeshift etc/
 
 # commit changes
 git add .
