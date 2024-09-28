@@ -130,14 +130,16 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
 
 # Custom aliases
-alias connect-headphone="echo \"connect CC:98:8B:D1:2E:98\" | bluetoothctl"
-alias connect-keychron="echo \"connect DC:2C:26:40:34:34\" | bluetoothctl"
 alias ga='git add'
 alias gc='git commit'
 alias gl='git log'
 alias gs='git status'
 alias gco='git checkout'
 alias gp='git push'
+alias gpu='git push -u origin HEAD'
+alias gpl='git pull'
+alias gd='git diff'
+alias gdc='git diff --cached'
 alias ls='ls --color=auto -l'
 
 export PATH=$PATH:~/.local/bin
