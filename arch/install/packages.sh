@@ -32,6 +32,9 @@ sudo pacman -S neovim tmux lazygit ripgrep
 sudo # installing sound controls
 sudo pacman -S pipewire pipewire-alsa pipewire-audio pipewire-pulse wireplumber pavucontrol
 
+# required for polybar's codes
+sudo pacman -S xdotool wmctrl
+
 # install timeshift backup tool and create a backup
 sudo pacman -S timeshift
 sudo timeshift --create
