@@ -33,7 +33,7 @@ sudo # installing sound controls
 sudo pacman -S pipewire pipewire-alsa pipewire-audio pipewire-pulse wireplumber pavucontrol
 
 # required for polybar's codes
-sudo pacman -S polybar xdotool wmctrl
+sudo pacman -S polybar xdotool wmctrl playerctl
 
 # install timeshift backup tool and create a backup
 sudo pacman -S timeshift
