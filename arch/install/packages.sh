@@ -28,3 +28,6 @@ pacman -S mupdf
 # Support neovim
 # TODO: Also install nvm and nodejs
 pacman -S neovim tmux lazygit ripgrep
+
+# installing sound controls
+pacman -S pipewire pipewire-alsa pipewire-audio pipewire-pulse wireplumber pavucontrol
