@@ -38,7 +38,7 @@ exec --no-startup-id blueman-applet
 exec --no-startup-id NetworkManager
 exec --no-startup-id nm-applet
 exec --no-startup-id obsidian
-exec_always --no-startup-id feh --bg-scale ~/backgrounds/hang-man-tree.jpg
+exec_always --no-startup-id feh --bg-scale ~/backgrounds/joker.jpg
 exec_always --no-startup-id picom
 exec_always --no-startup-id touchpad.sh
 exec_always --no-startup-id ~/.config/polybar/launch.sh
