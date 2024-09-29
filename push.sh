@@ -2,6 +2,7 @@ current_dir=$(pwd)
 
 cd "$(dirname "$0")"
 
+rm -rf .config/*
 mkdir -p .config/
 cp -r ~/.config/nvim/ .config/
 cp -r ~/.config/kitty/ .config/
@@ -11,6 +12,7 @@ cp -r ~/.config/polybar/ .config/
 cp -r ~/.tmux.conf ./
 cp -r ~/.bashrc ./
 
+rm -rf .local/*
 mkdir -p .local/share/
 mkdir -p .local/bin/
 cp -r ~/.local/share/fonts/ .local/share/
