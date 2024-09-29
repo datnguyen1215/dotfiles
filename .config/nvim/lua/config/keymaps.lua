@@ -13,3 +13,5 @@ vim.api.nvim_set_keymap("n", "<leader>oic", ":Octo issue create<CR>", { silent =
 
 vim.api.nvim_set_keymap("n", "<leader>opl", ":Octo pr list<CR>", { silent = true })
 vim.api.nvim_set_keymap("n", "<leader>opc", ":Octo pr create<CR>", { silent = true })
+
+vim.api.nvim_set_keymap("n", "y", '"+y', { noremap = true })
