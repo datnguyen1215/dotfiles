@@ -143,3 +143,8 @@ alias gdc='git diff --cached'
 alias ls='ls --color=auto -l'
 
 export PATH=$PATH:~/.local/bin
+
+# Load environment variables & secrets
+if [ -f ~/.secretrc ]; then
+	. ~/.secretrc
+fi
