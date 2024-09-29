@@ -25,6 +25,15 @@ bindsym $mod+b exec --no-startup-id firefox -P default
 bindsym $mod+F1 exec --no-startup-id systemctl suspend
 bindsym $mod+Shift+F1 exec --no-startup-id i3-msg exit
 
+# screen's brightness
+bindsym XF86MonBrightnessUp exec brightnessctl set 10%+
+bindsym XF86MonBrightnessDown exec brightnessctl set 10%-
+
+# Media keys
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+
 exec --no-startup-id blueman-applet
 exec --no-startup-id NetworkManager
 exec --no-startup-id nm-applet
