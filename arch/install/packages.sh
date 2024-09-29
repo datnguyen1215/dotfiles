@@ -35,6 +35,9 @@ sudo pacman -S pipewire pipewire-alsa pipewire-audio pipewire-pulse wireplumber 
 # required for polybar's codes
 sudo pacman -S polybar xdotool wmctrl playerctl
 
+# allow controlling screen's brightness
+sudo pacman -S brightnessctl
+
 # install timeshift backup tool and create a backup
 sudo pacman -S timeshift
 sudo timeshift --create
