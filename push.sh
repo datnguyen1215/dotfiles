@@ -12,8 +12,10 @@ cp -r ~/.tmux.conf ./
 cp -r ~/.bashrc ./
 
 mkdir -p .local/share/
+mkdir -p .local/bin/
 cp -r ~/.local/share/fonts/ .local/share/
 cp -r ~/.local/share/themes/ .local/share/
+cp -r ~/.local/bin/ .local/
 
 mkdir -p etc/
 cp -r /etc/timeshift etc/
