@@ -19,7 +19,7 @@ cp -r ~/.local/share/fonts/ .local/share/
 cp -r ~/.local/share/themes/ .local/share/
 cp -r ~/.local/bin/ .local/
 
-cp -r ~/.backgrounds/ ./
+cp -r ~/backgrounds/ ./
 
 mkdir -p etc/
 cp -r /etc/timeshift etc/
