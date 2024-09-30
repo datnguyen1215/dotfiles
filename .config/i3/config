@@ -23,7 +23,7 @@ client.focused #c4c400 #c4c400 #000000 #c4c400
 
 bindsym $mod+b exec --no-startup-id firefox -P default
 bindsym $mod+Shift+g exec --no-startup-id google-chrome-stable --profile-directory=Default
-bindsym $mod+F1 exec --no-startup-id systemctl suspend
+bindsym $mod+F1 exec --no-startup-id "dm-tool lock && systemctl suspend"
 bindsym $mod+Shift+F1 exec --no-startup-id i3-msg exit
 
 # screen's brightness
@@ -39,12 +39,13 @@ bindsym XF86AudioPrev exec playerctl previous
 bindsym $mod+Shift+Left resize set 50 ppt 100 ppt, resize shrink height 35px, move position 0 px 35 px, 
 bindsym $mod+Shift+Right resize set 50 ppt 100 ppt, resize shrink height 35px, move position 50 ppt 35 px, 
 
-exec_always --no-startup-id feh --bg-scale ~/backgrounds/joker.jpg
-exec_always --no-startup-id picom
-exec_always --no-startup-id touchpad.sh
+exec_always --no-startup-id "pkill feh && feh --bg-scale ~/backgrounds/joker.jpg"
+exec_always --no-startup-id "pkill picom && picom"
 exec_always --no-startup-id ~/.config/polybar/launch.sh
 exec_always --no-startup-id NetworkManager
 exec_always --no-startup-id nm-applet
+exec_always --no-startup-id blueman-applet
+exec --no-startup-id xrandr --output HDMI-0 --auto --right-of DP-0
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
