@@ -1,5 +1,5 @@
 sudo pacman -Syyu git github-cli
-sudo pacman -Sy gcc i3status kitty less xorg-xinput firefox openssh
+sudo pacman -Sy gcc make i3status kitty less xorg-xinput firefox openssh
 
 sudo # TODO: Remove this if no longer need to use obsidian
 sudo pacman -Sy obsidian
