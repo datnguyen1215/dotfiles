@@ -35,10 +35,10 @@ bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
-# Move floating window to the left, taking half the screen, subtracting 35px for the polybar
-bindsym Mod1+Control+h resize set 50 ppt 100 ppt, resize shrink height 35px, move position 0 px 35 px
-bindsym Mod1+Control+l resize set 50 ppt 100 ppt, resize shrink height 35px, move position 50 ppt 35 px
-bindsym Mod1+Control+k resize set 100 ppt 100 ppt, resize shrink height 35px, move position 0 px 35 px
+# Move floating window to the left, taking half the screen, subtracting 30px for the polybar
+bindsym Mod1+Control+h resize set 50 ppt 100 ppt, resize shrink height 30px, move position 0 px 30 px
+bindsym Mod1+Control+l resize set 50 ppt 100 ppt, resize shrink height 30px, move position 50 ppt 30 px
+bindsym Mod1+Control+k resize set 100 ppt 100 ppt, resize shrink height 30px, move position 0 px 30 px
 bindsym Mod1+Shift+l move container to output right, focus output right
 bindsym Mod1+Shift+h move container to output left, focus output left
 
@@ -142,7 +142,7 @@ bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
-bindsym $mod+Shift+space floating toggle, resize set 100 ppt 100 ppt, resize shrink height 37px
+bindsym $mod+Shift+space floating toggle, resize set 100 ppt 100 ppt, resize shrink height 30 px, move up 4 px
 
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
