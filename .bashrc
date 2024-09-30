@@ -150,6 +150,7 @@ alias gpl='git pull'
 alias gd='git diff'
 alias gdc='git diff --cached'
 alias ls='ls --color=auto -l'
+alias battery='cat /sys/class/power_supply/BAT0/capacity'
 
 export PATH=$PATH:~/.local/bin
 
