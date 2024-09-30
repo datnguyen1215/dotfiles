@@ -15,11 +15,11 @@ FOCUSED_WORKSPACE=$(i3-msg -t get_workspaces | jq '.[] | select(.focused==true).
 #sleep 0.1
 # if focused_workspace > 10, switch to target 2
 if [ $FOCUSED_WORKSPACE -gt 10 ]; then
-	i3-msg -t run_command "workspace $TARGET_WORKSPACE_1; workspace $TARGET_WORKSPACE_2"
+	i3-msg -t run_command "workspace $TARGET_WORKSPACE_1"
   sleep 0.2s
-	i3-msg -t run_command "focus output HDMI-0"
+  i3-msg -t run_command "workspace $TARGET_WORKSPACE_2"
 else
-	i3-msg -t run_command "workspace $TARGET_WORKSPACE_2; workspace $TARGET_WORKSPACE_1"
+	i3-msg -t run_command "workspace $TARGET_WORKSPACE_2"
   sleep 0.2s
-	i3-msg -t run_command "focus output DP-0"
+  i3-msg -t run_command "workspace $TARGET_WORKSPACE_1"
 fi
