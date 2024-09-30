@@ -38,12 +38,10 @@ bindsym XF86AudioPrev exec playerctl previous
 bindsym $mod+Shift+Left resize set 50 ppt 100 ppt, resize shrink height 35px, move position 0 px 35 px, 
 bindsym $mod+Shift+Right resize set 50 ppt 100 ppt, resize shrink height 35px, move position 50 ppt 35 px, 
 
-exec --no-startup-id obsidian
 exec_always --no-startup-id feh --bg-scale ~/backgrounds/joker.jpg
 exec_always --no-startup-id picom
 exec_always --no-startup-id touchpad.sh
 exec_always --no-startup-id ~/.config/polybar/launch.sh
-exec_always --no-startup-id blueman-applet
 exec_always --no-startup-id NetworkManager
 exec_always --no-startup-id nm-applet
 
