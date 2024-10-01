@@ -3,5 +3,4 @@
 -- Add any additional options here
 vim.g.mapleader = ";"
 
--- set clipboard=unnamedplus
-vim.opt.clipboard = ""
+vim.opt.clipboard = "unnamedplus"
