@@ -23,7 +23,7 @@ client.focused #c4c400 #c4c400 #000000 #c4c400
 
 bindsym $mod+b exec --no-startup-id firefox -P default
 bindsym $mod+Shift+g exec --no-startup-id google-chrome-stable --profile-directory=Default
-bindsym $mod+F1 exec --no-startup-id systemctl suspend
+bindsym $mod+F1 exec --no-startup-id "systemctl suspend && dm-tool lock"
 bindsym $mod+Shift+F1 exec --no-startup-id i3-msg exit
 
 # screen's brightness
