@@ -40,6 +40,9 @@ keys = [
     Key([mod], "g", lazy.spawn("google-chrome-stable"), desc="Launch Google Chrome"),
     Key([mod], "F1", lazy.spawn("systemctl suspend"), desc="Suspend"),
 
+    # alt + shift + h
+    Key(["mod1", "shift"], "h", lazy.window.toscreen(1), desc="Move window to screen 0"),
+    Key(["mod1", "shift"], "l", lazy.window.toscreen(0), desc="Move window to screen 1"),
 
     # volume control
     Key([], "XF86AudioRaiseVolume", lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ +5%"), desc="Volume up"),
