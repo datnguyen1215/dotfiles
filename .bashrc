@@ -12,15 +12,6 @@ case $- in
 *) return ;;
 esac
 
-# Turn on bash compeltion
-if ! shopt -oq posix; then
-	if [ -f /usr/share/bash-completion/bash_completion ]; then
-		. /usr/share/bash-completion/bash_completion
-	elif [ -f /etc/bash_completion ]; then
-		. /etc/bash_completion
-	fi
-fi
-
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
@@ -150,7 +141,6 @@ alias gpl='git pull'
 alias gd='git diff'
 alias gdc='git diff --cached'
 alias ls='ls --color=auto -l'
-alias battery='cat /sys/class/power_supply/BAT0/capacity'
 
 export PATH=$PATH:~/.local/bin
 
