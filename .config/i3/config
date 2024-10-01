@@ -17,6 +17,8 @@ smart_gaps on
 
 # remove window title bars
 for_window [class="^.*"] border pixel 2
+for_window [class="pavucontrol"] floating enable
+for_window [class="Blueman-manager"] floating enable
 
 # change colors for borders
 client.focused #c4c400 #c4c400 #000000 #c4c400
