@@ -9,8 +9,6 @@ cp -r .local ~/
 cp -r .config ~/
 cp .tmux.conf ~/
 
-sudo cp -r etc/ /etc/
-
 chmod 755 ~/.local/bin/*
 
 cd $current_dir
