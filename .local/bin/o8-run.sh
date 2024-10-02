@@ -1,5 +1,6 @@
 PROJECT_PATH=~/work/projects/o8/
 
+tmux rename-window 'o8-run'
 tmux split-pane -h -t :.1
 tmux split-pane -v -t :.1
 tmux split-pane -v -t :.3

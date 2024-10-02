@@ -1,6 +1,7 @@
 #!/bin/bash
 export PROJECT_PATH=~/personal/projects/webhooks/
 
+tmux rename-window 'webhooks'
 tmux split-pane -v -t :.1
 
 tmux send-keys -t :.1 "cd $PROJECT_PATH" C-m
