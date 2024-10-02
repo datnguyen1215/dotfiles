@@ -12,6 +12,7 @@ return {
       "tailwindcss-language-server",
       "sql-formatter",
       "graphql-language-service-cli",
+      "python-lsp-server",
     },
   },
 }
