@@ -26,52 +26,109 @@
 
 import os
 import subprocess
-from libqtile import bar, layout, qtile, widget, hook
-from libqtile.config import Click, Drag, Group, Key, Match, Screen
+from libqtile import layout, qtile, hook
+from libqtile.config import Click, Drag, Group, Key, Match
+from libqtile.core.manager import Qtile
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 
 mod = "mod4"
 terminal = guess_terminal()
 
+
+def focus_left_window(qtile: Qtile):
+    # current window
+    current_window = qtile.current_window
+    screen_windows = qtile.current_group.windows
+
+    # if there's a window on the left of the current window
+    if screen_windows.index(current_window) > 0:
+        qtile.current_group.focus(
+            screen_windows[screen_windows.index(current_window) - 1])
+        return
+
+    # if there's a window on the screen on the left
+    current_screen = qtile.current_screen
+    current_screen_index = qtile.screens.index(current_screen)
+    if current_screen_index < len(qtile.screens) - 1:
+        qtile.focus_screen(current_screen_index + 1)
+        return
+
+
+def focus_right_window(qtile: Qtile):
+    # current window
+    current_window = qtile.current_window
+    screen_windows = qtile.current_group.windows
+
+    # if there's a window on the right of the current window
+    if screen_windows.index(current_window) < len(screen_windows) - 1:
+        qtile.current_group.focus(
+            screen_windows[screen_windows.index(current_window) + 1])
+        return
+
+    # if there's a window on the screen on the right
+    current_screen = qtile.current_screen
+    current_screen_index = qtile.screens.index(current_screen)
+    if current_screen_index > 0:
+        qtile.focus_screen(current_screen_index - 1)
+        return
+
+
 keys = [
     Key([mod], "d", lazy.spawn("dmenu_run"), desc="Launch dmenu"),
     Key([mod], "b", lazy.spawn("firefox"), desc="Launch Firefox"),
-    Key([mod], "g", lazy.spawn("google-chrome-stable"), desc="Launch Google Chrome"),
+    Key([mod], "g", lazy.spawn("google-chrome-stable"),
+        desc="Launch Google Chrome"),
     Key([mod], "F1", lazy.spawn("systemctl suspend"), desc="Suspend"),
 
     # alt + shift + h
-    Key(["mod1", "shift"], "h", lazy.window.toscreen(1), desc="Move window to screen 0"),
-    Key(["mod1", "shift"], "l", lazy.window.toscreen(0), desc="Move window to screen 1"),
+    Key(["mod1", "shift"], "h", lazy.window.toscreen(
+        1), desc="Move window to screen 0"),
+    Key(["mod1", "shift"], "l", lazy.window.toscreen(
+        0), desc="Move window to screen 1"),
 
     # volume control
-    Key([], "XF86AudioRaiseVolume", lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ +5%"), desc="Volume up"),
-    Key([], "XF86AudioLowerVolume", lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ -5%"), desc="Volume down"),
-    Key([], "XF86AudioMute", lazy.spawn("pactl set-sink-mute @DEFAULT_SINK@ toggle"), desc="Volume mute"),
+    Key([], "XF86AudioRaiseVolume", lazy.spawn(
+        "pactl set-sink-volume @DEFAULT_SINK@ +5%"), desc="Volume up"),
+    Key([], "XF86AudioLowerVolume", lazy.spawn(
+        "pactl set-sink-volume @DEFAULT_SINK@ -5%"), desc="Volume down"),
+    Key([], "XF86AudioMute", lazy.spawn(
+        "pactl set-sink-mute @DEFAULT_SINK@ toggle"), desc="Volume mute"),
 
     # brightness control
-    Key([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl set +10%"), desc="Brightness up"),
-    Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl set 10%-"), desc="Brightness down"),
+    Key([], "XF86MonBrightnessUp", lazy.spawn(
+        "brightnessctl set +10%"), desc="Brightness up"),
+    Key([], "XF86MonBrightnessDown", lazy.spawn(
+        "brightnessctl set 10%-"), desc="Brightness down"),
 
     # A list of available commands that can be bound to keys can be found
     # at https://docs.qtile.org/en/latest/manual/config/lazy.html
     # Switch between windows
-    Key([mod], "h", lazy.layout.left(), lazy.window.bring_to_front(), desc="Move focus to left"),
-    Key([mod], "l", lazy.layout.right(), lazy.window.bring_to_front(), desc="Move focus to right"),
-    Key([mod], "j", lazy.layout.down(), lazy.window.bring_to_front(), desc="Move focus down"),
-    Key([mod], "k", lazy.layout.up(), lazy.window.bring_to_front(), desc="Move focus up"),
-    Key([mod], "space", lazy.group.next_window(), lazy.window.bring_to_front(), desc="Move window focus to other window"),
-    
+    Key([mod], "h", lazy.function(focus_left_window),
+        lazy.window.bring_to_front(), desc="Move focus to left"),
+    Key([mod], "l", lazy.function(focus_right_window),
+        lazy.window.bring_to_front(), desc="Move focus to right"),
+    Key([mod], "j", lazy.layout.down(),
+        lazy.window.bring_to_front(), desc="Move focus down"),
+    Key([mod], "k", lazy.layout.up(),
+        lazy.window.bring_to_front(), desc="Move focus up"),
+    Key([mod], "space", lazy.group.next_window(),
+        lazy.window.bring_to_front(), desc="Move window focus to other window"),
+
     # Move windows between left/right columns or move up/down in current stack.
     # Moving out of range in Columns layout will create new column.
-    Key([mod, "shift"], "h", lazy.layout.shuffle_left(), desc="Move window to the left"),
-    Key([mod, "shift"], "l", lazy.layout.shuffle_right(), desc="Move window to the right"),
+    Key([mod, "shift"], "h", lazy.layout.shuffle_left(),
+        desc="Move window to the left"),
+    Key([mod, "shift"], "l", lazy.layout.shuffle_right(),
+        desc="Move window to the right"),
     Key([mod, "shift"], "j", lazy.layout.shuffle_down(), desc="Move window down"),
     Key([mod, "shift"], "k", lazy.layout.shuffle_up(), desc="Move window up"),
     # Grow windows. If current window is on the edge of screen and direction
     # will be to screen edge - window would shrink.
-    Key([mod, "control"], "h", lazy.layout.grow_left(), desc="Grow window to the left"),
-    Key([mod, "control"], "l", lazy.layout.grow_right(), desc="Grow window to the right"),
+    Key([mod, "control"], "h", lazy.layout.grow_left(),
+        desc="Grow window to the left"),
+    Key([mod, "control"], "l", lazy.layout.grow_right(),
+        desc="Grow window to the right"),
     Key([mod, "control"], "j", lazy.layout.grow_down(), desc="Grow window down"),
     Key([mod, "control"], "k", lazy.layout.grow_up(), desc="Grow window up"),
     Key([mod], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
@@ -95,7 +152,8 @@ keys = [
         lazy.window.toggle_fullscreen(),
         desc="Toggle fullscreen on the focused window",
     ),
-    Key([mod, "shift"], "space", lazy.window.toggle_floating(), desc="Toggle floating on the focused window"),
+    Key([mod, "shift"], "space", lazy.window.toggle_floating(),
+        desc="Toggle floating on the focused window"),
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
@@ -109,12 +167,14 @@ for vt in range(1, 8):
         Key(
             ["control", "mod1"],
             f"f{vt}",
-            lazy.core.change_vt(vt).when(func=lambda: qtile.core.name == "wayland"),
+            lazy.core.change_vt(vt).when(
+                func=lambda: qtile.core.name == "wayland"),
             desc=f"Switch to VT{vt}",
         )
     )
 
 groups = [Group(i) for i in '123456789']
+
 
 def go_to_group(index: int):
     def _inner(qtile):
@@ -126,6 +186,7 @@ def go_to_group(index: int):
         qtile.groups_map["{}".format(index+1+10)].toscreen(1)
 
     return _inner
+
 
 def move_to_group(index: int):
     def _inner(qtile):
@@ -140,6 +201,7 @@ def move_to_group(index: int):
             qtile.current_window.togroup("{}".format(index+1+10))
 
     return _inner
+
 
 for i in range(len(groups)):
     keys.append(Key([mod], str(i+1), lazy.function(go_to_group(i))))
@@ -182,8 +244,10 @@ screens = []
 
 # Drag floating layouts.
 mouse = [
-    Drag([mod], "Button1", lazy.window.set_position_floating(), start=lazy.window.get_position()),
-    Drag([mod], "Button3", lazy.window.set_size_floating(), start=lazy.window.get_size()),
+    Drag([mod], "Button1", lazy.window.set_position_floating(),
+         start=lazy.window.get_position()),
+    Drag([mod], "Button3", lazy.window.set_size_floating(),
+         start=lazy.window.get_size()),
     Click([mod], "Button2", lazy.window.bring_to_front()),
 ]
 
@@ -234,10 +298,12 @@ wl_xcursor_size = 24
 # java that happens to be on java's whitelist.
 wmname = "LG3D"
 
+
 @hook.subscribe.startup_once
 def startup_once():
     home = os.path.expanduser('~/.config/qtile/startup_once.sh')
     subprocess.call([home])
+
 
 @hook.subscribe.startup
 def startup():
