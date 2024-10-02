@@ -8,6 +8,9 @@ cd "$(dirname "$0")"
 cp -r .local ~/
 cp -r .config ~/
 cp .tmux.conf ~/
+cp .bashrc ~/
+
+cp -r backgrounds/ ~/
 
 chmod 755 ~/.local/bin/*
 
