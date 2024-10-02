@@ -214,6 +214,7 @@ layout_theme = {
     "border_width": 2,
     "border_focus": "#c4c400",
     "margin": 5,
+    "border_on_single": True,
 }
 
 layouts = [
