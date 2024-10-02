@@ -148,27 +148,6 @@ for i in range(len(groups)):
 for i in range(len(groups)):
     groups.append(Group("{}".format(i+1+10), screen_affinity=1))
 
-#for i in group_1:
-#    keys.extend(
-#        [
-#            # mod + group number = switch to group
-#            Key(
-#                [mod],
-#                i.name,
-#                #lazy.group[i.name].toscreen(),
-#                lazy.function(switch_to_group(i.name)),
-#                desc="Switch to group {}".format(i.name),
-#            ),
-#            # mod + shift + group number = switch to & move focused window to group
-#            #Key(
-#            #    [mod, "shift"],
-#            #    i,
-#            #    lazy.window.togroup(i),
-#            #    desc="Switch to & move focused window to group {}".format(i),
-#            #),
-#        ]
-#    )
-
 layout_theme = {
     "border_width": 2,
     "border_focus": "#c4c400",
@@ -226,7 +205,9 @@ floating_layout = layout.Floating(
         Match(title="pinentry"),  # GPG key password entry
         Match(wm_class="pavucontrol"),  # pavucontrol
         Match(wm_class="Blueman-manager"),
-    ]
+    ],
+    border_width=2,
+    border_focus="#c4c400",
 )
 auto_fullscreen = True
 focus_on_window_activation = "smart"
