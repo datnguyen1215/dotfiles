@@ -28,6 +28,5 @@ cp -r /etc/timeshift etc/
 
 # commit changes
 git add .
-git commit -m "Update dotfiles"
 
 cd $current_dir
