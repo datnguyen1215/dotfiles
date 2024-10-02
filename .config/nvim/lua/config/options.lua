@@ -4,3 +4,30 @@
 vim.g.mapleader = ";"
 
 vim.opt.clipboard = ""
+
+-- create new files in the directory of the current buffer
+--
+local Path = require("plenary.path")
+
+-- Function to create a new file in the directory of the current buffer
+local function create_new_file_in_buffer_dir()
+  -- Get the current buffer's file path
+  local current_file = vim.fn.expand("%:p")
+  local current_dir = Path:new(current_file):parent().filename
+
+  -- Prompt for the new file name
+  local new_file_name = vim.fn.input("New file name: ", "", "file")
+  
+  if new_file_name == "" then
+    return
+  end
+
+  -- Generate the full path for the new file
+  local new_file_path = Path:new(current_dir, new_file_name).filename
+
+  -- Open the new file
+  vim.cmd("e " .. new_file_path)
+end
+
+-- Bind the function to a keymap, for example, <leader>nf
+vim.keymap.set("n", "<leader>nf", create_new_file_in_buffer_dir, { noremap = true, silent = true })
