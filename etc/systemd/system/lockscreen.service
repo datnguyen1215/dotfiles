@@ -1,0 +1,9 @@
+[Unit]
+Description=DM Lock before sleep
+Before=sleep.target
+
+[Service]
+ExecStart=/home/dnguyen/.local/bin/lockscreen.sh
+
+[Install]
+WantedBy=sleep.target
