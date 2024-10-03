@@ -43,9 +43,7 @@ def focus_window(direction: str):
 
         functions = {
             "left": {
-                # sort windows by their x-coordinate, but also make sure the window's top is as close to the current window's top as possible
                 "sort_windows": lambda win: (win.window.get_geometry().x - qtile.current_window.window.get_geometry().x, abs(win.window.get_geometry().y - qtile.current_window.window.get_geometry().y)),
-                # sort screens by their x-coordinate, but also make sure the screen's top is as close to the current screen's top as possible
                 "sort_screens": lambda screen: (screen.x - qtile.current_screen.x, abs(screen.y - qtile.current_screen.y)),
                 "get_screens": lambda: [screen for screen in qtile.screens if screen.x < qtile.current_screen.x],
                 "get_windows": lambda: [win for win in qtile.current_group.windows if win.window.get_geometry().x < qtile.current_window.window.get_geometry().x],
@@ -57,13 +55,13 @@ def focus_window(direction: str):
                 "get_windows": lambda: [win for win in qtile.current_group.windows if win.window.get_geometry().x > qtile.current_window.window.get_geometry().x],
             },
             "top": {
-                "sort_windows": lambda win: (qtile.current_window.window.get_geometry().y - win.window.get_geometry().y, abs(win.window.get_geometry().x - qtile.current_window.window.get_geometry().x)),
+                "sort_windows": lambda win: (abs(win.window.get_geometry().x - qtile.current_window.window.get_geometry().x), qtile.current_window.window.get_geometry().y - win.window.get_geometry().y),
                 "sort_screens": lambda screen: (qtile.current_screen.y - screen.y, abs(screen.x - qtile.current_screen.x)),
                 "get_screens": lambda: [screen for screen in qtile.screens if screen.y < qtile.current_screen.y],
                 "get_windows": lambda: [win for win in qtile.current_group.windows if win.window.get_geometry().y < qtile.current_window.window.get_geometry().y],
             },
             "bottom": {
-                "sort_windows": lambda win: (qtile.current_window.window.get_geometry().y - win.window.get_geometry().y, abs(win.window.get_geometry().x - qtile.current_window.window.get_geometry().x)),
+                "sort_windows": lambda win: (abs(win.window.get_geometry().x - qtile.current_window.window.get_geometry().x), win.window.get_geometry().y),
                 "sort_screens": lambda screen: (qtile.current_screen.y - screen.y, abs(screen.x - qtile.current_screen.x)),
                 "get_screens": lambda: [screen for screen in qtile.screens if screen.y > qtile.current_screen.y],
                 "get_windows": lambda: [win for win in qtile.current_group.windows if win.window.get_geometry().y > qtile.current_window.window.get_geometry().y],
