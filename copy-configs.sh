@@ -6,7 +6,6 @@ rm -rf .config/*
 mkdir -p .config/
 cp -r ~/.config/nvim/ .config/
 cp -r ~/.config/kitty/ .config/
-cp -r ~/.config/i3/ .config/
 cp -r ~/.config/gtk-3.0/ .config/
 cp -r ~/.config/polybar/ .config/
 cp -r ~/.config/picom/ .config/
@@ -25,6 +24,5 @@ cp -r ~/backgrounds/ ./
 
 # commit changes
 git add .
-git commit -m "Update dotfiles"
 
 cd $current_dir
