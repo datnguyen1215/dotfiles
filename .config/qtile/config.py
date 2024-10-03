@@ -36,42 +36,58 @@ mod = "mod4"
 terminal = guess_terminal()
 
 
-def focus_left_window(qtile: Qtile):
-    # current window
-    current_window = qtile.current_window
-    screen_windows = qtile.current_group.windows
+def focus_window(direction: str):
+    def focus_window_inner(qtile: Qtile):
+        if not qtile.current_window:
+            return
 
-    # if there's a window on the left of the current window
-    if screen_windows.index(current_window) > 0:
-        qtile.current_group.focus(
-            screen_windows[screen_windows.index(current_window) - 1])
-        return
+        functions = {
+            "left": {
+                # sort windows by their x-coordinate, but also make sure the window's top is as close to the current window's top as possible
+                "sort_windows": lambda win: (win.window.get_geometry().x - qtile.current_window.window.get_geometry().x, abs(win.window.get_geometry().y - qtile.current_window.window.get_geometry().y)),
+                # sort screens by their x-coordinate, but also make sure the screen's top is as close to the current screen's top as possible
+                "sort_screens": lambda screen: (screen.x - qtile.current_screen.x, abs(screen.y - qtile.current_screen.y)),
+                "get_screens": lambda: [screen for screen in qtile.screens if screen.x < qtile.current_screen.x],
+                "get_windows": lambda: [win for win in qtile.current_group.windows if win.window.get_geometry().x < qtile.current_window.window.get_geometry().x],
+            },
+            "right": {
+                "sort_windows": lambda win: (win.window.get_geometry().x - qtile.current_window.window.get_geometry().x, abs(win.window.get_geometry().y - qtile.current_window.window.get_geometry().y)),
+                "sort_screens": lambda screen: (screen.x - qtile.current_screen.x, abs(screen.y - qtile.current_screen.y)),
+                "get_screens": lambda: [screen for screen in qtile.screens if screen.x > qtile.current_screen.x],
+                "get_windows": lambda: [win for win in qtile.current_group.windows if win.window.get_geometry().x > qtile.current_window.window.get_geometry().x],
+            },
+            "top": {
+                "sort_windows": lambda win: (qtile.current_window.window.get_geometry().y - win.window.get_geometry().y, abs(win.window.get_geometry().x - qtile.current_window.window.get_geometry().x)),
+                "sort_screens": lambda screen: (qtile.current_screen.y - screen.y, abs(screen.x - qtile.current_screen.x)),
+                "get_screens": lambda: [screen for screen in qtile.screens if screen.y < qtile.current_screen.y],
+                "get_windows": lambda: [win for win in qtile.current_group.windows if win.window.get_geometry().y < qtile.current_window.window.get_geometry().y],
+            },
+            "bottom": {
+                "sort_windows": lambda win: (qtile.current_window.window.get_geometry().y - win.window.get_geometry().y, abs(win.window.get_geometry().x - qtile.current_window.window.get_geometry().x)),
+                "sort_screens": lambda screen: (qtile.current_screen.y - screen.y, abs(screen.x - qtile.current_screen.x)),
+                "get_screens": lambda: [screen for screen in qtile.screens if screen.y > qtile.current_screen.y],
+                "get_windows": lambda: [win for win in qtile.current_group.windows if win.window.get_geometry().y > qtile.current_window.window.get_geometry().y],
+            },
+        }
 
-    # if there's a window on the screen on the left
-    current_screen = qtile.current_screen
-    current_screen_index = qtile.screens.index(current_screen)
-    if current_screen_index < len(qtile.screens) - 1:
-        qtile.focus_screen(current_screen_index + 1)
-        return
+        sort_windows = functions[direction]["sort_windows"]
+        sort_screens = functions[direction]["sort_screens"]
+        get_screens = functions[direction]["get_screens"]
+        get_windows = functions[direction]["get_windows"]
 
+        windows = get_windows()
+        windows.sort(key=sort_windows)
 
-def focus_right_window(qtile: Qtile):
-    # current window
-    current_window = qtile.current_window
-    screen_windows = qtile.current_group.windows
+        if windows:
+            qtile.current_group.focus(windows[0])
+        else:
+            screens = get_screens()
+            screens.sort(key=sort_screens)
 
-    # if there's a window on the right of the current window
-    if screen_windows.index(current_window) < len(screen_windows) - 1:
-        qtile.current_group.focus(
-            screen_windows[screen_windows.index(current_window) + 1])
-        return
+            if screens:
+                qtile.focus_screen(qtile.screens.index(screens[0]))
 
-    # if there's a window on the screen on the right
-    current_screen = qtile.current_screen
-    current_screen_index = qtile.screens.index(current_screen)
-    if current_screen_index > 0:
-        qtile.focus_screen(current_screen_index - 1)
-        return
+    return lambda qtile: focus_window_inner(qtile)
 
 
 keys = [
@@ -104,13 +120,13 @@ keys = [
     # A list of available commands that can be bound to keys can be found
     # at https://docs.qtile.org/en/latest/manual/config/lazy.html
     # Switch between windows
-    Key([mod], "h", lazy.function(focus_left_window),
+    Key([mod], "h", lazy.function(focus_window("left")),
         lazy.window.bring_to_front(), desc="Move focus to left"),
-    Key([mod], "l", lazy.function(focus_right_window),
+    Key([mod], "l", lazy.function(focus_window("right")),
         lazy.window.bring_to_front(), desc="Move focus to right"),
-    Key([mod], "j", lazy.layout.down(),
+    Key([mod], "j", lazy.function(focus_window("bottom")),
         lazy.window.bring_to_front(), desc="Move focus down"),
-    Key([mod], "k", lazy.layout.up(),
+    Key([mod], "k", lazy.function(focus_window("top")),
         lazy.window.bring_to_front(), desc="Move focus up"),
     Key([mod], "space", lazy.group.next_window(),
         lazy.window.bring_to_front(), desc="Move window focus to other window"),
