@@ -8,9 +8,14 @@ cd "$(dirname "$0")"
 cp -r .local ~/
 cp -r .config ~/
 cp .tmux.conf ~/
+cp .bashrc ~/
 
-sudo cp -r etc/ /etc/
+cp -r backgrounds/ ~/
 
 chmod 755 ~/.local/bin/*
+
+sudo cp etc/systemd/system/lockscreen.service /etc/systemd/system/
+sudo systemctl daemon-reload
+sudo systemctl enable lockscreen.service
 
 cd $current_dir
