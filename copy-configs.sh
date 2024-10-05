@@ -22,7 +22,4 @@ cp -r ~/.local/bin/ .local/
 
 cp -r ~/backgrounds/ ./
 
-# copy the lockscreen.service
-cp /etc/systemd/system/lockscreen.service ./etc/systemd/system/
-
 cd $current_dir

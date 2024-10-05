@@ -14,8 +14,4 @@ cp -r backgrounds/ ~/
 
 chmod 755 ~/.local/bin/*
 
-sudo cp etc/systemd/system/lockscreen.service /etc/systemd/system/
-sudo systemctl daemon-reload
-sudo systemctl enable lockscreen.service
-
 cd $current_dir
