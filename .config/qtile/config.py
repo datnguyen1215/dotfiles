@@ -94,6 +94,7 @@ keys = [
     Key([mod], "g", lazy.spawn("google-chrome-stable"),
         desc="Launch Google Chrome"),
     Key([mod], "F1", lazy.spawn("systemctl suspend"), desc="Suspend"),
+    Key([mod], "s", lazy.spawn("scrot -e 'xclip -selection clipboard -t image/png -i $f && rm $f'"), desc="Take screenshot"),
 
     # alt + shift + h
     Key(["mod1", "shift"], "h", lazy.window.toscreen(
