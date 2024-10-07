@@ -8,4 +8,5 @@ require("config.tsserver")
 require("config.gitsigns")
 require("config.mapleader")
 require("config.keymaps")
+require("buffermind")
 vim.g.autoformat = false
