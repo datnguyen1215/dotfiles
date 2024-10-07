@@ -17,7 +17,7 @@ local function create_new_file_in_buffer_dir()
 
   -- Prompt for the new file name
   local new_file_name = vim.fn.input("New file name: ", "", "file")
-  
+
   if new_file_name == "" then
     return
   end
@@ -31,3 +31,14 @@ end
 
 -- Bind the function to a keymap, for example, <leader>nf
 vim.keymap.set("n", "<leader>nf", create_new_file_in_buffer_dir, { noremap = true, silent = true })
+
+vim.api.nvim_create_autocmd("BufEnter", {
+  pattern = "*",
+  callback = function()
+    if vim.fn.isdirectory(vim.fn.expand("%")) == 1 then
+      vim.cmd("cd " .. vim.fn.expand("%")) -- Change directory to the opened directory
+      vim.cmd("enew") -- Open a new empty buffer
+      vim.cmd("bdelete #") -- Delete the previous buffer
+    end
+  end,
+})
