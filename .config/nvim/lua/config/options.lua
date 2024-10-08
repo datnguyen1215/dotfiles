@@ -44,3 +44,32 @@ vim.api.nvim_create_autocmd("BufEnter", {
     end
   end,
 })
+
+-- Function to get the last segment of the current Neovim working directory
+local function get_last_dir_name()
+  local cwd = vim.fn.getcwd()
+  return vim.fn.fnamemodify(cwd, ":t")
+end
+
+-- Function to rename the tmux session
+local function rename_tmux_session()
+  local session_name = get_last_dir_name()
+  -- Check if running inside tmux
+  if os.getenv("TMUX") then
+    -- Use os.execute to run tmux command.
+    os.execute("tmux rename-window " .. session_name)
+  end
+end
+
+-- Set up an autocommand for VimEnter to rename the session when Neovim starts
+vim.api.nvim_create_autocmd("VimEnter", {
+  callback = function()
+    rename_tmux_session()
+  end,
+})
+
+vim.api.nvim_create_autocmd("VimLeave", {
+  callback = function()
+    os.execute("tmux rename-window " .. "bash")
+  end,
+})
