@@ -4,4 +4,4 @@ require("catppuccin").setup({
 
 vim.cmd.colorscheme("catppuccin")
 
-vim.api.nvim_set_hl(0, 'LineNr', { fg = "#8f49a6"})
+vim.api.nvim_set_hl(0, "LineNr", { fg = "#8f49a6" })

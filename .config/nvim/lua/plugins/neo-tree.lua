@@ -7,7 +7,11 @@ return {
       group = vim.api.nvim_create_augroup("Neotree_start_directory", { clear = true }),
       desc = "Start Neo-tree with directory",
       once = true,
-      callback = function() end,
+      callback = function()
+        if vim.fn.isdirectory(vim.fn.expand("%")) == 1 then
+          vim.cmd("ene")
+        end
+      end,
     })
   end,
   opts = {

@@ -5,6 +5,7 @@ vim.g.mapleader = ";"
 
 vim.opt.clipboard = ""
 vim.o.sessionoptions = vim.o.sessionoptions:gsub("folds", "")
+vim.o.cursorline = false
 
 -- create new files in the directory of the current buffer
 --
