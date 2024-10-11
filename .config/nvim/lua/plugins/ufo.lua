@@ -8,7 +8,8 @@ vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 local handler = function(virtText, lnum, endLnum, width, truncate)
   local newVirtText = {}
   local lastText = vim.fn.getline(endLnum):gsub("^%s*(.-)%s*$", "%1")
-  local suffix = (" %s      󰁂 %d lines"):format(lastText, endLnum - lnum)
+  local lineCountText = ("󰁂 %d lines"):format(endLnum - lnum)
+  local suffix = (" %s      %s"):format(lastText, lineCountText)
   local sufWidth = vim.fn.strdisplaywidth(suffix)
   local targetWidth = width - sufWidth
   local curWidth = 0
@@ -30,7 +31,8 @@ local handler = function(virtText, lnum, endLnum, width, truncate)
     end
     curWidth = curWidth + chunkWidth
   end
-  table.insert(newVirtText, { suffix, "MoreMsg" })
+  table.insert(newVirtText, { (" %s      "):format(lastText), "UfoSuffixGroup" })
+  table.insert(newVirtText, { lineCountText, "UfoLineCountGroup" })
   return newVirtText
 end
 
