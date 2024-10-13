@@ -10,3 +10,4 @@ require("config.mapleader")
 require("config.keymaps")
 require("buffermind")
 vim.g.autoformat = false
+vim.api.nvim_command("highlight UfoLineCountGroup guifg=#000000 guibg=#efb700 gui=bold")
