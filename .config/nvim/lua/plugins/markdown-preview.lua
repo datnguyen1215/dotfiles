@@ -1,3 +1,5 @@
+vim.g.mkdp_highlight_css = vim.fn.expand("~/.config/nvim/css/markdown-preview.css")
+
 return {
   "iamcco/markdown-preview.nvim",
   cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
