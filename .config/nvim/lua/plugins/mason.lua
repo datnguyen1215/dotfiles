@@ -13,6 +13,7 @@ return {
       "sql-formatter",
       "graphql-language-service-cli",
       "python-lsp-server",
+      "gopls",
     },
   },
 }
