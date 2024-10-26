@@ -286,6 +286,8 @@ floating_layout = layout.Floating(
         Match(title="pinentry"),  # GPG key password entry
         Match(wm_class="pavucontrol"),  # pavucontrol
         Match(wm_class="Blueman-manager"),
+        Match(wm_class="conky"),
+        Match(wm_class="Conky"),
     ],
     border_width=2,
     border_focus="#c4c400",

@@ -13,4 +13,7 @@ pkill picom
 while pgrep -u $UID -x picom >/dev/null; do sleep 1; done
 picom &
 
+pkill conky
+conky -c ~/.config/conky/conky.conf &
+
 ~/.config/polybar/launch.sh
