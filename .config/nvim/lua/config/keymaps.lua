@@ -50,3 +50,14 @@ end
 -- Map the functions to { and } keys
 vim.keymap.set("n", "{", skip_paragraph_backwards, { noremap = true, silent = true })
 vim.keymap.set("n", "}", skip_paragraph_forwards, { noremap = true, silent = true })
+
+vim.keymap.set("v", "<leader>d", function()
+  -- Yank the visual selection to register
+  vim.cmd('normal! "vy')
+
+  -- Get the yanked text from register v
+  local pattern = vim.fn.getreg("v"):gsub("\n", "\\n")
+
+  -- Delete lines globally matching the pattern
+  vim.cmd("%g/" .. vim.fn.escape(pattern, "\\") .. "/d")
+end, { noremap = true, silent = true })
