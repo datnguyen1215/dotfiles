@@ -5,6 +5,12 @@ vim.o.foldlevelstart = 99
 
 local fold_descendants = function()
   local ts_utils = require("nvim-treesitter.ts_utils")
+
+  -- Move the cursor to the end of the current node
+  local end_line = vim.fn.line(".")
+  local end_col = vim.fn.col({ end_line, "$" }) - 1
+  vim.api.nvim_win_set_cursor(0, { end_line, end_col })
+
   local current_node = ts_utils.get_node_at_cursor()
   if not current_node then
     print("No current node found")
