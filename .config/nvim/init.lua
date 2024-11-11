@@ -2,7 +2,6 @@
 require("config.lazy")
 require("config.copilot")
 require("config.cmp")
-require("config.telescope")
 require("config.colorscheme")
 require("config.tsserver")
 require("config.gitsigns")

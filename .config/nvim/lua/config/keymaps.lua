@@ -17,6 +17,45 @@ vim.api.nvim_set_keymap("n", "<leader>opc", ":Octo pr create<CR>", { silent = tr
 vim.api.nvim_set_keymap("n", "y", '"+y', { noremap = true })
 vim.api.nvim_set_keymap("v", "y", '"+y', { noremap = true })
 
+vim.api.nvim_set_keymap(
+  "n",
+  "<leader>hx",
+  ':lua require("harpoon.mark").add_file()<CR>',
+  { noremap = true, silent = true }
+)
+vim.api.nvim_set_keymap("n", "<leader>fh", ":Telescope harpoon marks<CR>", { noremap = true, silent = true })
+-- quick navigation
+vim.api.nvim_set_keymap(
+  "n",
+  "<leader>he",
+  ":lua require('harpoon.ui').toggle_quick_menu()<CR>",
+  { noremap = true, silent = true }
+)
+vim.api.nvim_set_keymap(
+  "n",
+  "<leader>1",
+  ':lua require("harpoon.ui").nav_file(1)<CR>',
+  { noremap = true, silent = true }
+)
+vim.api.nvim_set_keymap(
+  "n",
+  "<leader>2",
+  ':lua require("harpoon.ui").nav_file(2)<CR>',
+  { noremap = true, silent = true }
+)
+vim.api.nvim_set_keymap(
+  "n",
+  "<leader>3",
+  ':lua require("harpoon.ui").nav_file(3)<CR>',
+  { noremap = true, silent = true }
+)
+vim.api.nvim_set_keymap(
+  "n",
+  "<leader>4",
+  ':lua require("harpoon.ui").nav_file(4)<CR>',
+  { noremap = true, silent = true }
+)
+
 -- Function to move to the previous paragraph and skip over folds
 local function skip_paragraph_backwards()
   local start_line = vim.fn.line(".")
