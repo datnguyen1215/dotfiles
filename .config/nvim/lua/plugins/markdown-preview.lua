@@ -1,5 +1,6 @@
 vim.g.mkdp_highlight_css = vim.fn.expand("~/.config/nvim/css/markdown-preview.css")
 vim.g.mkdp_browser = "firefox"
+vim.g.mkdp_page_title = "${name}"
 
 return {
   "iamcco/markdown-preview.nvim",
