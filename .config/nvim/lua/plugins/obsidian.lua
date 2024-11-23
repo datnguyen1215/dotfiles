@@ -31,7 +31,17 @@ return {
 
     ---@return table
     note_frontmatter_func = function(note)
-      return {}
+      -- This is equivalent to the default frontmatter function.
+      local out = {}
+
+      -- `note.metadata` contains any manually added fields in the frontmatter.
+      -- So here we just make sure those fields are kept in the frontmatter.
+      if note.metadata ~= nil and not vim.tbl_isempty(note.metadata) then
+        for k, v in pairs(note.metadata) do
+          out[k] = v
+        end
+      end
+      return out
     end,
 
     -- Optional, configure additional syntax highlighting / extmarks.
