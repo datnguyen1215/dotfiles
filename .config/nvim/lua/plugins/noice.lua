@@ -21,11 +21,5 @@ return {
         position = { row = "50%", col = "50%" },
       },
     },
-    notify = {
-      enabled = false,
-    },
-    messages = {
-      enabled = false,
-    },
   },
 }
