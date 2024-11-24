@@ -57,40 +57,6 @@ vim.api.nvim_set_keymap(
   { noremap = true, silent = true }
 )
 
--- Function to move to the previous paragraph and skip over folds
-local function skip_paragraph_backwards()
-  local start_line = vim.fn.line(".")
-  local current_fold_closed = vim.fn.foldclosed(start_line) ~= -1
-
-  repeat
-    vim.cmd("normal! {")
-  until vim.fn.foldclosed(vim.fn.line(".")) == -1 or current_fold_closed
-
-  -- Check if it's necessary to stay within the same paragraph
-  if vim.fn.foldclosed(vim.fn.line(".")) ~= -1 then
-    vim.cmd("normal! zj")
-  end
-end
-
--- Function to move to the next paragraph and skip over folds
-local function skip_paragraph_forwards()
-  local start_line = vim.fn.line(".")
-  local current_fold_closed = vim.fn.foldclosed(start_line) ~= -1
-
-  repeat
-    vim.cmd("normal! }")
-  until vim.fn.foldclosed(vim.fn.line(".")) == -1 or current_fold_closed
-
-  -- Check if it's necessary to stay within the same paragraph
-  if vim.fn.foldclosed(vim.fn.line(".")) ~= -1 then
-    vim.cmd("normal! zk")
-  end
-end
-
--- Map the functions to { and } keys
-vim.keymap.set("n", "{", skip_paragraph_backwards, { noremap = true, silent = true })
-vim.keymap.set("n", "}", skip_paragraph_forwards, { noremap = true, silent = true })
-
 vim.keymap.set("v", "<leader>d", function()
   -- Yank the visual selection to register
   vim.cmd('normal! "vy')
